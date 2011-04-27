@@ -2,7 +2,8 @@
 *.user
 *.cachefile
 *.trx
-TwilightNightmare/TwilightNightmare/bin
-TwilightNightmare/TwilightNightmare/obj
-TwilightNightmare/TwilightNightmareContent/bin
-TwilightNightmare/TwilightNightmareContent/obj
+Topological Sorting Test/bin
+Topological Sorting Test/obj
+TopologicalSorting/bin
+TopologicalSorting/obj
+TestResults/*

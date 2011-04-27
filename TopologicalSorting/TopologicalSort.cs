@@ -9,9 +9,9 @@ namespace TopologicalSorting
     /// Represents a sorting solution
     /// </summary>
     public class TopologicalSort
-        :IEnumerable<IEnumerable<OrderedProcess>>, IEnumerable<OrderedProcess>
+        :IEnumerable<ISet<OrderedProcess>>, IEnumerable<OrderedProcess>
     {
-        private List<IEnumerable<OrderedProcess>> collections = new List<IEnumerable<OrderedProcess>>();
+        private List<ISet<OrderedProcess>> collections = new List<ISet<OrderedProcess>>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TopologicalSort"/> class.
@@ -31,7 +31,7 @@ namespace TopologicalSorting
             g.CalculateSort(this);
         }
 
-        internal void Append(IEnumerable<OrderedProcess> collection)
+        internal void Append(ISet<OrderedProcess> collection)
         {
             collections.Add(collection);
         }
@@ -41,7 +41,7 @@ namespace TopologicalSorting
         /// Gets the enumerator which enumerates sets of processes, where a set can be executed in any order
         /// </summary>
         /// <returns></returns>
-        IEnumerator<IEnumerable<OrderedProcess>> IEnumerable<IEnumerable<OrderedProcess>>.GetEnumerator()
+        IEnumerator<ISet<OrderedProcess>> IEnumerable<ISet<OrderedProcess>>.GetEnumerator()
         {
             return collections.GetEnumerator();
         }

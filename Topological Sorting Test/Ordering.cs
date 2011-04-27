@@ -22,8 +22,7 @@ namespace Topological_Sorting_Test
             OrderedProcess b = new OrderedProcess(g, "B");
             OrderedProcess c = new OrderedProcess(g, "C");
 
-            a.Before(b);
-            b.Before(c);
+            a.Before(b).Before(c);
 
             c.After(b).After(a);
 
@@ -69,6 +68,7 @@ namespace Topological_Sorting_Test
         /// Tests that an impossible ordering constraint is detected
         /// </summary>
         [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void Unorderable()
         {
             DependancyGraph g = new DependancyGraph();
@@ -79,17 +79,7 @@ namespace Topological_Sorting_Test
             a.Before(b);
             b.Before(a);
 
-            bool exception = false;
-            try
-            {
-                var o = g.CalculateSort();
-            }
-            catch (InvalidOperationException)
-            {
-                exception = true;
-            }
-
-            Assert.IsTrue(exception);
+            g.CalculateSort();
         }
 
         /// <summary>
@@ -162,6 +152,7 @@ namespace Topological_Sorting_Test
         /// Tests that a complex branching system with an impossible constraint is detected
         /// </summary>
         [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void BranchingUnorderable()
         {
             DependancyGraph g = new DependancyGraph();
@@ -177,17 +168,7 @@ namespace Topological_Sorting_Test
 
             a.Before(b1, b2).Before(c1, c2, c3, c4).Before(d).Before(b1);
 
-            bool exception = false;
-            try
-            {
-                var o = g.CalculateSort();
-            }
-            catch (InvalidOperationException)
-            {
-                exception = true;
-            }
-
-            Assert.IsTrue(exception);
+            g.CalculateSort();
         }
     }
 }

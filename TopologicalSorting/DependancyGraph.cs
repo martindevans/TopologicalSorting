@@ -82,7 +82,7 @@ namespace TopologicalSorting
         /// </summary>
         /// <param name="processes">The processes.</param>
         /// <returns></returns>
-        private IEnumerable<IEnumerable<OrderedProcess>> SolveResourceDependancies(ISet<OrderedProcess> processes)
+        private IEnumerable<ISet<OrderedProcess>> SolveResourceDependancies(ISet<OrderedProcess> processes)
         {
             if (resources.Count == 0)
                 yield return processes;

@@ -6,7 +6,7 @@ using System.Text;
 namespace TopologicalSorting
 {
     /// <summary>
-    /// A class of resource which may be instanciated a limited number of times
+    /// A class of resource which may be used by a single concurrent process
     /// </summary>
     public class Resource
     {

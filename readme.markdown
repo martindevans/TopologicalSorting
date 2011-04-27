@@ -59,6 +59,6 @@ In this example, "a" must execute before "b", "c" and "d", and "d" must execute 
 
 > a -> c -> b -> d
 
-However is enumerated an an IEnumerable<ISet<OrderedProcess>> we would instead get the one single valid result:
+However, if enumerated as an IEnumerable<ISet<OrderedProcess>> we would instead get the one single valid result:
 
 > a -> {b, c} -> d

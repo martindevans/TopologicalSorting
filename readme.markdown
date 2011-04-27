@@ -53,6 +53,7 @@ Example
 In this example, "a" must execute before "b", "c" and "d", and "d" must execute before "b" and "c", but there are no constraints between "b" and "c". Therefore either of these results would be valid:
 
 > a -> b -> c -> d
+
 > a -> c -> b -> d
 
 However is enumerated an an IEnumerable<ISet<OrderedProcess>> we would instead get the one single valid result:

@@ -16,10 +16,13 @@ Tasks are represented by OrderedProcess objects. OrderedProcess objects have nam
 > DependancyGraph g = new DependancyGraph();
 >
 > OrderedProcess a = new OrderedProcess(g, "Task A");
+>
 > OrderedProcess b = new OrderedProcess(g, "Task B");
+>
 > OrderedProcess c = new OrderedProcess(g, "Task C");
 > 
 > a.Before(b);
+>
 > b.Before(c);
 
 The ordering relationships can be chained, so the previous ordering could alternatively be expressed like so:

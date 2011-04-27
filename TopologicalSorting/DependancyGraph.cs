@@ -38,6 +38,14 @@ namespace TopologicalSorting
         }
         #endregion
 
+        public int ProcessCount
+        {
+            get
+            {
+                return processes.Count;
+            }
+        }
+
         #region sorting
         /// <summary>
         /// Calculates the sort which results from this dependancy network

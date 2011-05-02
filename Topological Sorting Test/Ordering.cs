@@ -16,7 +16,7 @@ namespace Topological_Sorting_Test
         [TestMethod]
         public void BasicOrderAfter()
         {
-            DependancyGraph g = new DependancyGraph();
+            DependencyGraph g = new DependencyGraph();
 
             OrderedProcess a = new OrderedProcess(g, "A");
             OrderedProcess b = new OrderedProcess(g, "B");
@@ -44,7 +44,7 @@ namespace Topological_Sorting_Test
         [TestMethod]
         public void BasicOrderBefore()
         {
-            DependancyGraph g = new DependancyGraph();
+            DependencyGraph g = new DependencyGraph();
 
             OrderedProcess a = new OrderedProcess(g, "A");
             OrderedProcess b = new OrderedProcess(g, "B");
@@ -71,7 +71,7 @@ namespace Topological_Sorting_Test
         [ExpectedException(typeof(InvalidOperationException))]
         public void Unorderable()
         {
-            DependancyGraph g = new DependancyGraph();
+            DependencyGraph g = new DependencyGraph();
 
             OrderedProcess a = new OrderedProcess(g, "A");
             OrderedProcess b = new OrderedProcess(g, "B");
@@ -88,7 +88,7 @@ namespace Topological_Sorting_Test
         [TestMethod]
         public void BasicBranching()
         {
-            DependancyGraph g = new DependancyGraph();
+            DependencyGraph g = new DependencyGraph();
 
             OrderedProcess a = new OrderedProcess(g, "A");
             OrderedProcess b1 = new OrderedProcess(g, "B1");
@@ -116,7 +116,7 @@ namespace Topological_Sorting_Test
         [TestMethod]
         public void ComplexBranching()
         {
-            DependancyGraph g = new DependancyGraph();
+            DependencyGraph g = new DependencyGraph();
 
             OrderedProcess a = new OrderedProcess(g, "A");
             OrderedProcess b1 = new OrderedProcess(g, "B1");
@@ -155,7 +155,7 @@ namespace Topological_Sorting_Test
         [ExpectedException(typeof(InvalidOperationException))]
         public void BranchingUnorderable()
         {
-            DependancyGraph g = new DependancyGraph();
+            DependencyGraph g = new DependencyGraph();
 
             OrderedProcess a = new OrderedProcess(g, "A");
             OrderedProcess b1 = new OrderedProcess(g, "B1");

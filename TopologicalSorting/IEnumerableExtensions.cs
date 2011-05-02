@@ -39,7 +39,7 @@ namespace TopologicalSorting
         }
 
         /// <summary>
-        /// Indicates that all members of the enumerable must happen after all the prececessors
+        /// Indicates that all members of the enumerable must happen after all the predecessors
         /// </summary>
         /// <param name="followers">The followers.</param>
         /// <param name="predecessors">The predecessors.</param>
@@ -50,7 +50,7 @@ namespace TopologicalSorting
         }
 
         /// <summary>
-        /// Indicates that all members of the enumerable must happen after all the prececessors
+        /// Indicates that all members of the enumerable must happen after all the predecessors
         /// </summary>
         /// <param name="followers">The followers.</param>
         /// <param name="predecessors">The predecessors.</param>

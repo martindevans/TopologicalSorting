@@ -8,12 +8,12 @@ namespace TopologicalSorting
     /// <summary>
     /// A graph of processes and resources from which a topological sort can be extracted
     /// </summary>
-    public class DependancyGraph
+    public class DependencyGraph
     {
         #region fields
         HashSet<OrderedProcess> processes = new HashSet<OrderedProcess>();
         /// <summary>
-        /// Gets the processes which are part of this dependancy graph
+        /// Gets the processes which are part of this dependency graph
         /// </summary>
         /// <value>The processes.</value>
         public IEnumerable<OrderedProcess> Processes
@@ -26,7 +26,7 @@ namespace TopologicalSorting
 
         HashSet<Resource> resources = new HashSet<Resource>();
         /// <summary>
-        /// Gets the resources which are part of this dependancy graph
+        /// Gets the resources which are part of this dependency graph
         /// </summary>
         /// <value>The resources.</value>
         public IEnumerable<Resource> Resources
@@ -38,6 +38,10 @@ namespace TopologicalSorting
         }
         #endregion
 
+        /// <summary>
+        /// Gets the process count.
+        /// </summary>
+        /// <value>The process count.</value>
         public int ProcessCount
         {
             get
@@ -48,7 +52,7 @@ namespace TopologicalSorting
 
         #region sorting
         /// <summary>
-        /// Calculates the sort which results from this dependancy network
+        /// Calculates the sort which results from this dependency network
         /// </summary>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException">Thrown if no sort exists for the given set of constraints</exception>
@@ -58,7 +62,7 @@ namespace TopologicalSorting
         }
 
         /// <summary>
-        /// Append the result of this dependancy graph to the end of the given sorting solution
+        /// Append the result of this dependency graph to the end of the given sorting solution
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <returns></returns>
@@ -86,7 +90,7 @@ namespace TopologicalSorting
         }
 
         /// <summary>
-        /// Given a set of processes which do not interdepend, split up into multiple sets which do not exceed available resource concurrency
+        /// Given a set of processes which are not interdependent, split up into multiple sets which do not use the same resource concurrently
         /// </summary>
         /// <param name="processes">The processes.</param>
         /// <returns></returns>
@@ -103,8 +107,8 @@ namespace TopologicalSorting
                     //all sets this process may be added to
                     IEnumerable<HashSet<OrderedProcess>> agreeableSets = result                     //from the set of result sets
                         .Where(set => set                                                           //select a candidate set to add to
-                            .Where(p => p.ResourcesSet.Overlaps(process.Resources))                        //select processes whose resource usage overlaps this one
-                            .Count() == 0);                                                             //if there are none which overlap, then this is a valid set
+                            .Where(p => p.ResourcesSet.Overlaps(process.Resources))                 //select processes whose resource usage overlaps this one
+                            .IsEmpty());                                                            //if there are none which overlap, then this is a valid set
 
                     //the single best set to add to
                     HashSet<OrderedProcess> agreeableSet = null;
@@ -141,13 +145,13 @@ namespace TopologicalSorting
         internal static void CheckGraph(OrderedProcess a, OrderedProcess b)
         {
             if (a.Graph != b.Graph)
-                throw new ArgumentException(string.Format("process {0} is not assosciated with the same graph as process {1}", a, b));
+                throw new ArgumentException(string.Format("process {0} is not associated with the same graph as process {1}", a, b));
         }
 
         internal static void CheckGraph(Resource a, OrderedProcess b)
         {
             if (a.Graph != b.Graph)
-                throw new ArgumentException(string.Format("Resource {0} is not assosciated with the same graph as process {1}", a, b));
+                throw new ArgumentException(string.Format("Resource {0} is not associated with the same graph as process {1}", a, b));
         }
     }
 }

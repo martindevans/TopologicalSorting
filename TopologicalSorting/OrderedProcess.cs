@@ -18,7 +18,7 @@ namespace TopologicalSorting
         /// <summary>
         /// The graph this process is part of
         /// </summary>
-        public readonly DependancyGraph Graph;
+        public readonly DependencyGraph Graph;
 
         private HashSet<OrderedProcess> predecessors = new HashSet<OrderedProcess>();
         /// <summary>
@@ -72,7 +72,7 @@ namespace TopologicalSorting
         /// </summary>
         /// <param name="graph">The graph which this process is part of</param>
         /// <param name="name">The name of this process</param>
-        public OrderedProcess(DependancyGraph graph, string name)
+        public OrderedProcess(DependencyGraph graph, string name)
         {
             Graph = graph;
             Name = name;
@@ -89,7 +89,7 @@ namespace TopologicalSorting
         /// <returns>returns this process</returns>
         public OrderedProcess Before(OrderedProcess follower)
         {
-            DependancyGraph.CheckGraph(this, follower);
+            DependencyGraph.CheckGraph(this, follower);
 
             if (followers.Add(follower))
                 follower.After(this);
@@ -127,7 +127,7 @@ namespace TopologicalSorting
         /// <returns>returns this process</returns>
         public OrderedProcess After(OrderedProcess predecessor)
         {
-            DependancyGraph.CheckGraph(this, predecessor);
+            DependencyGraph.CheckGraph(this, predecessor);
 
             if (predecessors.Add(predecessor))
                 predecessor.Before(this);
@@ -167,7 +167,7 @@ namespace TopologicalSorting
         /// <returns>returns this process</returns>
         public void Requires(Resource resource)
         {
-            DependancyGraph.CheckGraph(resource, this);
+            DependencyGraph.CheckGraph(resource, this);
 
             if (resources.Add(resource))
                 resource.UsedBy(this);

@@ -17,7 +17,7 @@ namespace TopologicalSorting
         /// <summary>
         /// The graph this class is part of
         /// </summary>
-        public readonly DependancyGraph Graph;
+        public readonly DependencyGraph Graph;
 
         private HashSet<OrderedProcess> users = new HashSet<OrderedProcess>();
         /// <summary>
@@ -37,7 +37,7 @@ namespace TopologicalSorting
         /// </summary>
         /// <param name="graph">The graph which this ResourceClass is part of</param>
         /// <param name="name">The name of this resource</param>
-        public Resource(DependancyGraph graph, string name)
+        public Resource(DependencyGraph graph, string name)
         {
             Graph = graph;
             Name = name;
@@ -53,7 +53,7 @@ namespace TopologicalSorting
         /// <returns></returns>
         public void UsedBy(OrderedProcess process)
         {
-            DependancyGraph.CheckGraph(this, process);
+            DependencyGraph.CheckGraph(this, process);
 
             if (users.Add(process))
                 process.Requires(this);

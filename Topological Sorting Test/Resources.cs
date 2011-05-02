@@ -16,7 +16,7 @@ namespace Topological_Sorting_Test
         [TestMethod]
         public void BasicResourceResolution()
         {
-            DependancyGraph g = new DependancyGraph();
+            DependencyGraph g = new DependencyGraph();
 
             Resource res = new Resource(g, "resource");
 
@@ -52,7 +52,7 @@ namespace Topological_Sorting_Test
         [TestMethod]
         public void BranchingResourceResolution()
         {
-            DependancyGraph g = new DependancyGraph();
+            DependencyGraph g = new DependencyGraph();
 
             OrderedProcess a = new OrderedProcess(g, "A");
             OrderedProcess b1 = new OrderedProcess(g, "B1");

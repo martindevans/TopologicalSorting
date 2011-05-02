@@ -45,7 +45,7 @@
     <Compile Include="OrderedProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.cs" />
-    <Compile Include="DependancyGraph.cs" />
+    <Compile Include="DependencyGraph.cs" />
     <Compile Include="TopologicalSort.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

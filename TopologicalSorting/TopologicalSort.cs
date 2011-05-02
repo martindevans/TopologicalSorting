@@ -25,7 +25,7 @@ namespace TopologicalSorting
         /// Initializes a new instance of the <see cref="TopologicalSort"/> class.
         /// </summary>
         /// <param name="g">The graph to fill this sort with</param>
-        public TopologicalSort(DependancyGraph g)
+        public TopologicalSort(DependencyGraph g)
             :this()
         {
             g.CalculateSort(this);

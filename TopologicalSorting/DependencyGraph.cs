@@ -73,7 +73,7 @@ namespace TopologicalSorting
             do
             {
                 HashSet<OrderedProcess> set = new HashSet<OrderedProcess>(
-                    unused.Where(p => p.Predecessors.Where(pre => unused.Contains(pre)).IsEmpty()) //select processes which have no predecessors in the unused set, which means that all their predecessors must either be used, or not exist, either way is fine
+                    unused.Where(p => !unused.Overlaps(p.Predecessors)) //select processes which have no predecessors in the unused set, which means that all their predecessors must either be used, or not exist, either way is fine
                 );
 
                 if (set.Count == 0)

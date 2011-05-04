@@ -20,7 +20,7 @@ namespace TopologicalSorting
         /// </returns>
         internal static bool IsEmpty<T>(this IEnumerable<T> e)
         {
-            return e.FirstOrDefault().Equals(default(T));
+            return !e.GetEnumerator().MoveNext();
         }
 
         /// <summary>

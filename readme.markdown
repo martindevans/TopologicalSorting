@@ -55,10 +55,10 @@ Example
 
 In this example, "a" must execute before "b", "c" and "d", and "d" must execute before "b" and "c", but there are no constraints between "b" and "c". Therefore either of these results would be valid:
 
-> a -> b -> c -> d
+> a -> d -> b -> c
 
-> a -> c -> b -> d
+> a -> d -> c -> b
 
 However, if enumerated as an IEnumerable<ISet<OrderedProcess>> we would instead get the one single valid result:
 
-> a -> {b, c} -> d
+> a -> d -> {b, c}

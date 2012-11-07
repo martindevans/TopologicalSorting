@@ -81,7 +81,7 @@ namespace TopologicalSorting
 
                 unused.ExceptWith(set);
 
-                foreach (var subset in SolveResourceDependancies(set))
+                foreach (var subset in SolveResourceDependencies(set))
                     instance.Append(subset);
             }
             while (unused.Count > 0);
@@ -94,9 +94,11 @@ namespace TopologicalSorting
         /// </summary>
         /// <param name="processes">The processes.</param>
         /// <returns></returns>
-        private IEnumerable<ISet<OrderedProcess>> SolveResourceDependancies(ISet<OrderedProcess> processes)
+        private IEnumerable<ISet<OrderedProcess>> SolveResourceDependencies(ISet<OrderedProcess> processes)
         {
-            if (resources.Count == 0)
+            // if there are no resources in this graph, or none of the processes in this set have any
+            // resources, we can simply return the set of processes
+            if (resources.Count == 0 || !processes.SelectMany(p => p.ResourcesSet).Any())
                 yield return processes;
             else
             {

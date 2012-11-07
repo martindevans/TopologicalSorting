@@ -13,7 +13,7 @@ Fluent Interface
 
 Tasks are represented by OrderedProcess objects. OrderedProcess objects have names to uniquely identifty them, or you can inherit off OrderedProcess directly in your code where you implement your application specific tasks. Order of tasks is simple (find more examples in the Tests project):
 
-> DependancyGraph g = new DependancyGraph();
+> DependencyGraph g = new DependencyGraph();
 >
 > OrderedProcess a = new OrderedProcess(g, "Task A");
 >
@@ -41,12 +41,12 @@ Even more can be chained on to the end of this:
 
 > a.Before(b, c, d).After(e);
 
-This states that a must run before b, c or d, and that e must run after b, c and d.
+This states that a must run before b, c or d, and that e must run before b, c and d.
 
 Output
 ------
 
-A sort operation is calculated by calling CalculateSort on a dependency graph after all the process relationships have been set up. The output is a TopologicalSort object (or an InvalidOperationException is an impossible set of constraints is in place). A topological sort object is enumerable in two different ways. enumerating is as an IEnumerable<OrderedProcess> will return all the processes in a valid order to execute them. Alternatively enumerating as an IEnumerable<ISet<OrderedProcess>> will enumerate sets of processes which may be executed in parallel.
+A sort operation is calculated by calling CalculateSort on a dependency graph after all the process relationships have been set up. The output is a TopologicalSort object (or an InvalidOperationException if an impossible set of constraints is in place). A topological sort object is enumerable in two different ways. enumerating it as an IEnumerable<OrderedProcess> will return all the processes in a valid order to execute them. Alternatively enumerating as an IEnumerable<ISet<OrderedProcess>> will enumerate sets of processes which may be executed in parallel.
 
 Example
 -------

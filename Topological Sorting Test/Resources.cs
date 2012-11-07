@@ -74,6 +74,10 @@ namespace Topological_Sorting_Test
             Assert.AreEqual(1, s.Skip(0).First().Count());
             Assert.AreEqual(a, s.Skip(0).First().First());
 
+            //check that D comes last
+            Assert.AreEqual(1, s.Skip(4).First().Count());
+            Assert.AreEqual(d, s.Skip(4).First().First());
+
             //check that no set contains both c1 and c3
             Assert.AreEqual(0, s.Where(set => set.Contains(c1) && set.Contains(c3)).Count());
         }

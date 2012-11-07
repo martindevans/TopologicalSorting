@@ -12,13 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topo", "Topo\Topo.csproj", "{9B6BD892-B94C-4ED4-B898-25721FFC9E1E}"
-EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = TopologicalSorting.vsmdi
 	EndGlobalSection
@@ -51,18 +45,12 @@ Global
 		{FC8C4BDE-4BFE-491F-8F23-3F1DA50DA5D4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{FC8C4BDE-4BFE-491F-8F23-3F1DA50DA5D4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FC8C4BDE-4BFE-491F-8F23-3F1DA50DA5D4}.Release|x86.ActiveCfg = Release|Any CPU
-		{9B6BD892-B94C-4ED4-B898-25721FFC9E1E}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{9B6BD892-B94C-4ED4-B898-25721FFC9E1E}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{9B6BD892-B94C-4ED4-B898-25721FFC9E1E}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{9B6BD892-B94C-4ED4-B898-25721FFC9E1E}.Debug|x86.ActiveCfg = Debug|x86
-		{9B6BD892-B94C-4ED4-B898-25721FFC9E1E}.Debug|x86.Build.0 = Debug|x86
-		{9B6BD892-B94C-4ED4-B898-25721FFC9E1E}.Release|Any CPU.ActiveCfg = Release|x86
-		{9B6BD892-B94C-4ED4-B898-25721FFC9E1E}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{9B6BD892-B94C-4ED4-B898-25721FFC9E1E}.Release|Mixed Platforms.Build.0 = Release|x86
-		{9B6BD892-B94C-4ED4-B898-25721FFC9E1E}.Release|x86.ActiveCfg = Release|x86
-		{9B6BD892-B94C-4ED4-B898-25721FFC9E1E}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal

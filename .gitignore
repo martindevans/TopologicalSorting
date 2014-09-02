@@ -7,3 +7,5 @@ Topological Sorting Test/obj
 TopologicalSorting/bin
 TopologicalSorting/obj
 TestResults/*
+/*.nupkg
+/TopologicalSorting/*.ncrunchproject

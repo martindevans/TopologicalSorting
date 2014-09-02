@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace TopologicalSorting
 {
@@ -11,7 +10,7 @@ namespace TopologicalSorting
     public class DependencyGraph
     {
         #region fields
-        HashSet<OrderedProcess> processes = new HashSet<OrderedProcess>();
+        readonly HashSet<OrderedProcess> _processes = new HashSet<OrderedProcess>();
         /// <summary>
         /// Gets the processes which are part of this dependency graph
         /// </summary>
@@ -20,11 +19,11 @@ namespace TopologicalSorting
         {
             get
             {
-                return processes;
+                return _processes;
             }
         }
 
-        HashSet<Resource> resources = new HashSet<Resource>();
+        readonly HashSet<Resource> _resources = new HashSet<Resource>();
         /// <summary>
         /// Gets the resources which are part of this dependency graph
         /// </summary>
@@ -33,7 +32,7 @@ namespace TopologicalSorting
         {
             get
             {
-                return resources;
+                return _resources;
             }
         }
         #endregion
@@ -46,7 +45,7 @@ namespace TopologicalSorting
         {
             get
             {
-                return processes.Count;
+                return _processes.Count;
             }
         }
 
@@ -68,7 +67,7 @@ namespace TopologicalSorting
         /// <returns></returns>
         public TopologicalSort CalculateSort(TopologicalSort instance)
         {
-            HashSet<OrderedProcess> unused = new HashSet<OrderedProcess>(processes);
+            HashSet<OrderedProcess> unused = new HashSet<OrderedProcess>(_processes);
 
             do
             {
@@ -98,7 +97,7 @@ namespace TopologicalSorting
         {
             // if there are no resources in this graph, or none of the processes in this set have any
             // resources, we can simply return the set of processes
-            if (resources.Count == 0 || !processes.SelectMany(p => p.ResourcesSet).Any())
+            if (_resources.Count == 0 || !processes.SelectMany(p => p.ResourcesSet).Any())
                 yield return processes;
             else
             {
@@ -113,7 +112,7 @@ namespace TopologicalSorting
                             .IsEmpty());                                                            //if there are none which overlap, then this is a valid set
 
                     //the single best set to add to
-                    HashSet<OrderedProcess> agreeableSet = null;
+                    HashSet<OrderedProcess> agreeableSet;
 
                     if (agreeableSets.IsEmpty())
                     {
@@ -136,12 +135,12 @@ namespace TopologicalSorting
 
         internal bool Add(OrderedProcess orderedProcess)
         {
-            return processes.Add(orderedProcess);
+            return _processes.Add(orderedProcess);
         }
 
         internal bool Add(Resource resourceClass)
         {
-            return resources.Add(resourceClass);
+            return _resources.Add(resourceClass);
         }
 
         internal static void CheckGraph(OrderedProcess a, OrderedProcess b)

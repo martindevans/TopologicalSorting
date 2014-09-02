@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace TopologicalSorting
 {
@@ -20,7 +17,7 @@ namespace TopologicalSorting
         /// </summary>
         public readonly DependencyGraph Graph;
 
-        private HashSet<OrderedProcess> predecessors = new HashSet<OrderedProcess>();
+        private readonly HashSet<OrderedProcess> _predecessors = new HashSet<OrderedProcess>();
         /// <summary>
         /// Gets the predecessors of this process
         /// </summary>
@@ -29,11 +26,11 @@ namespace TopologicalSorting
         {
             get
             {
-                return predecessors;
+                return _predecessors;
             }
         }
 
-        private HashSet<OrderedProcess> followers = new HashSet<OrderedProcess>();
+        private readonly HashSet<OrderedProcess> _followers = new HashSet<OrderedProcess>();
         /// <summary>
         /// Gets the followers of this process
         /// </summary>
@@ -41,11 +38,11 @@ namespace TopologicalSorting
         {
             get
             {
-                return followers;
+                return _followers;
             }
         }
 
-        private HashSet<Resource> resources = new HashSet<Resource>();
+        private readonly HashSet<Resource> _resources = new HashSet<Resource>();
         /// <summary>
         /// Gets the resources this process depends upon
         /// </summary>
@@ -54,14 +51,14 @@ namespace TopologicalSorting
         {
             get
             {
-                return resources;
+                return _resources;
             }
         }
         internal ISet<Resource> ResourcesSet
         {
             get
             {
-                return resources;
+                return _resources;
             }
         }
         #endregion
@@ -91,7 +88,7 @@ namespace TopologicalSorting
         {
             DependencyGraph.CheckGraph(this, follower);
 
-            if (followers.Add(follower))
+            if (_followers.Add(follower))
                 follower.After(this);
 
             return follower;
@@ -129,7 +126,7 @@ namespace TopologicalSorting
         {
             DependencyGraph.CheckGraph(this, predecessor);
 
-            if (predecessors.Add(predecessor))
+            if (_predecessors.Add(predecessor))
                 predecessor.Before(this);
 
             return predecessor;
@@ -169,7 +166,7 @@ namespace TopologicalSorting
         {
             DependencyGraph.CheckGraph(resource, this);
 
-            if (resources.Add(resource))
+            if (_resources.Add(resource))
                 resource.UsedBy(this);
         }
         #endregion

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace TopologicalSorting
 {
@@ -11,7 +9,7 @@ namespace TopologicalSorting
     public class TopologicalSort
         :IEnumerable<ISet<OrderedProcess>>, IEnumerable<OrderedProcess>
     {
-        private List<ISet<OrderedProcess>> collections = new List<ISet<OrderedProcess>>();
+        private readonly List<ISet<OrderedProcess>> _collections = new List<ISet<OrderedProcess>>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TopologicalSort"/> class.
@@ -33,7 +31,7 @@ namespace TopologicalSorting
 
         internal void Append(ISet<OrderedProcess> collection)
         {
-            collections.Add(collection);
+            _collections.Add(collection);
         }
 
         #region IEnumerable
@@ -43,7 +41,7 @@ namespace TopologicalSorting
         /// <returns></returns>
         IEnumerator<ISet<OrderedProcess>> IEnumerable<ISet<OrderedProcess>>.GetEnumerator()
         {
-            return collections.GetEnumerator();
+            return _collections.GetEnumerator();
         }
 
         /// <summary>
@@ -63,12 +61,11 @@ namespace TopologicalSorting
         /// <returns></returns>
         IEnumerator<OrderedProcess> IEnumerable<OrderedProcess>.GetEnumerator()
         {
-            IEnumerable<IEnumerable<OrderedProcess>> collections = (this as IEnumerable<IEnumerable<OrderedProcess>>);
+            IEnumerable<IEnumerable<OrderedProcess>> collections = this;
 
-            foreach (var collection in collections)
-                foreach (var process in collection)
-                    yield return process;
+            return collections.SelectMany(collection => collection).GetEnumerator();
         }
+
         #endregion
     }
 }

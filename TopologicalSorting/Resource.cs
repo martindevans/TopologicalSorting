@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace TopologicalSorting
 {
@@ -19,7 +16,7 @@ namespace TopologicalSorting
         /// </summary>
         public readonly DependencyGraph Graph;
 
-        private HashSet<OrderedProcess> users = new HashSet<OrderedProcess>();
+        private readonly HashSet<OrderedProcess> _users = new HashSet<OrderedProcess>();
         /// <summary>
         /// Gets a set of processes which use this resource
         /// </summary>
@@ -28,7 +25,7 @@ namespace TopologicalSorting
         {
             get
             {
-                return users;
+                return _users;
             }
         }
 
@@ -55,7 +52,7 @@ namespace TopologicalSorting
         {
             DependencyGraph.CheckGraph(this, process);
 
-            if (users.Add(process))
+            if (_users.Add(process))
                 process.Requires(this);
         }
 

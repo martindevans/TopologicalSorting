@@ -2,10 +2,14 @@
 *.user
 *.cachefile
 *.trx
+*.nupkg
+*.ncrunchproject
+
+_ReSharper.Caches
+TestResults
+
 Topological Sorting Test/bin
 Topological Sorting Test/obj
+
 TopologicalSorting/bin
 TopologicalSorting/obj
-TestResults/*
-/*.nupkg
-/TopologicalSorting/*.ncrunchproject

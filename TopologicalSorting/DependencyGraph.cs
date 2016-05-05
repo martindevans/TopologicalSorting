@@ -105,10 +105,12 @@ namespace TopologicalSorting
 
                 foreach (var process in processes)
                 {
+                    var process1 = process;
+
                     //all sets this process may be added to
                     IEnumerable<HashSet<OrderedProcess>> agreeableSets = result                     //from the set of result sets
                         .Where(set => set                                                           //select a candidate set to add to
-                            .Where(p => p.ResourcesSet.Overlaps(process.Resources))                 //select processes whose resource usage overlaps this one
+                            .Where(p => p.ResourcesSet.Overlaps(process1.Resources))                //select processes whose resource usage overlaps this one
                             .IsEmpty());                                                            //if there are none which overlap, then this is a valid set
 
                     //the single best set to add to

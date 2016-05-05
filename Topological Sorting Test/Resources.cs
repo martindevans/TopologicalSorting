@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TopologicalSorting;
@@ -79,7 +77,7 @@ namespace Topological_Sorting_Test
             Assert.AreEqual(d, s.Skip(4).First().First());
 
             //check that no set contains both c1 and c3
-            Assert.AreEqual(0, s.Where(set => set.Contains(c1) && set.Contains(c3)).Count());
+            Assert.AreEqual(0, s.Count(set => set.Contains(c1) && set.Contains(c3)));
         }
     }
 }

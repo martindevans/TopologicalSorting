@@ -5,7 +5,7 @@ namespace TopologicalSorting
     /// <summary>
     /// A class of resource which may be used by a single concurrent process
     /// </summary>
-    public class Resource
+    public class Resource<T>
     {
         /// <summary>
         /// The name of this resource
@@ -14,14 +14,14 @@ namespace TopologicalSorting
         /// <summary>
         /// The graph this class is part of
         /// </summary>
-        public readonly DependencyGraph Graph;
+        public readonly DependencyGraph<T> Graph;
 
-        private readonly HashSet<OrderedProcess> _users = new HashSet<OrderedProcess>();
+        private readonly HashSet<OrderedProcess<T>> _users = new HashSet<OrderedProcess<T>>();
         /// <summary>
         /// Gets a set of processes which use this resource
         /// </summary>
         /// <value>The users.</value>
-        public IEnumerable<OrderedProcess> Users
+        public IEnumerable<OrderedProcess<T>> Users
         {
             get
             {
@@ -34,7 +34,7 @@ namespace TopologicalSorting
         /// </summary>
         /// <param name="graph">The graph which this ResourceClass is part of</param>
         /// <param name="name">The name of this resource</param>
-        public Resource(DependencyGraph graph, string name)
+        public Resource(DependencyGraph<T> graph, string name)
         {
             Graph = graph;
             Name = name;
@@ -48,9 +48,9 @@ namespace TopologicalSorting
         /// </summary>
         /// <param name="process">The process.</param>
         /// <returns></returns>
-        public void UsedBy(OrderedProcess process)
+        public void UsedBy(OrderedProcess<T> process)
         {
-            DependencyGraph.CheckGraph(this, process);
+            DependencyGraph<T>.CheckGraph(this, process);
 
             if (_users.Add(process))
                 process.Requires(this);
@@ -60,16 +60,16 @@ namespace TopologicalSorting
         /// Indicates that this resource is used by the given processes
         /// </summary>
         /// <param name="processes">The processes.</param>
-        public void UsedBy(params OrderedProcess[] processes)
+        public void UsedBy(params OrderedProcess<T>[] processes)
         {
-            UsedBy(processes as IEnumerable<OrderedProcess>);
+            UsedBy(processes as IEnumerable<OrderedProcess<T>>);
         }
 
         /// <summary>
         /// Indicates that this resource is used by the given processes
         /// </summary>
         /// <param name="processes">The processes.</param>
-        public void UsedBy(IEnumerable<OrderedProcess> processes)
+        public void UsedBy(IEnumerable<OrderedProcess<T>> processes)
         {
             foreach (var process in processes)
                 UsedBy(process);

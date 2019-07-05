@@ -6,10 +6,10 @@ namespace TopologicalSorting
     /// <summary>
     /// Represents a sorting solution
     /// </summary>
-    public class TopologicalSort
-        :IEnumerable<ISet<OrderedProcess>>, IEnumerable<OrderedProcess>
+    public class TopologicalSort<T>
+        :IEnumerable<ISet<OrderedProcess<T>>>, IEnumerable<OrderedProcess<T>>
     {
-        private readonly List<ISet<OrderedProcess>> _collections = new List<ISet<OrderedProcess>>();
+        private readonly List<ISet<OrderedProcess<T>>> _collections = new List<ISet<OrderedProcess<T>>>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TopologicalSort"/> class.
@@ -23,13 +23,13 @@ namespace TopologicalSorting
         /// Initializes a new instance of the <see cref="TopologicalSort"/> class.
         /// </summary>
         /// <param name="g">The graph to fill this sort with</param>
-        public TopologicalSort(DependencyGraph g)
+        public TopologicalSort(DependencyGraph<T> g)
             :this()
         {
             g.CalculateSort(this);
         }
 
-        internal void Append(ISet<OrderedProcess> collection)
+        internal void Append(ISet<OrderedProcess<T>> collection)
         {
             _collections.Add(collection);
         }
@@ -39,7 +39,7 @@ namespace TopologicalSorting
         /// Gets the enumerator which enumerates sets of processes, where a set can be executed in any order
         /// </summary>
         /// <returns></returns>
-        IEnumerator<ISet<OrderedProcess>> IEnumerable<ISet<OrderedProcess>>.GetEnumerator()
+        IEnumerator<ISet<OrderedProcess<T>>> IEnumerable<ISet<OrderedProcess<T>>>.GetEnumerator()
         {
             return _collections.GetEnumerator();
         }
@@ -52,20 +52,21 @@ namespace TopologicalSorting
         /// </returns>
         public System.Collections.IEnumerator GetEnumerator()
         {
-            return (this as IEnumerable<OrderedProcess>).GetEnumerator();
+            return (this as IEnumerable<OrderedProcess<T>>).GetEnumerator();
         }
 
         /// <summary>
         /// Gets the enumerator which enumerates through the processes in an order to be executed
         /// </summary>
         /// <returns></returns>
-        IEnumerator<OrderedProcess> IEnumerable<OrderedProcess>.GetEnumerator()
+        IEnumerator<OrderedProcess<T>> IEnumerable<OrderedProcess<T>>.GetEnumerator()
         {
-            IEnumerable<IEnumerable<OrderedProcess>> collections = this;
+            IEnumerable<IEnumerable<OrderedProcess<T>>> collections = this;
 
             return collections.SelectMany(collection => collection).GetEnumerator();
         }
 
         #endregion
+
     }
 }

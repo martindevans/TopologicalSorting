@@ -15,17 +15,17 @@ namespace Topological_Sorting_Test
         [TestMethod]
         public void BasicOrderAfter()
         {
-            DependencyGraph g = new DependencyGraph();
+            DependencyGraph<string> g = new DependencyGraph<string>();
 
-            OrderedProcess a = new OrderedProcess(g, "A");
-            OrderedProcess b = new OrderedProcess(g, "B");
-            OrderedProcess c = new OrderedProcess(g, "C");
+            OrderedProcess<string> a = new OrderedProcess<string>(g, "A");
+            OrderedProcess<string> b = new OrderedProcess<string>(g, "B");
+            OrderedProcess<string> c = new OrderedProcess<string>(g, "C");
 
             a.Before(b).Before(c);
 
             c.After(b).After(a);
 
-            IEnumerable<IEnumerable<OrderedProcess>> s = g.CalculateSort();
+            IEnumerable<IEnumerable<OrderedProcess<string>>> s = g.CalculateSort();
 
             Assert.AreEqual(1, s.Skip(0).First().Count());
             Assert.AreEqual(a, s.Skip(0).First().First());
@@ -43,15 +43,15 @@ namespace Topological_Sorting_Test
         [TestMethod]
         public void BasicOrderBefore()
         {
-            DependencyGraph g = new DependencyGraph();
+            DependencyGraph<string> g = new DependencyGraph<string>();
 
-            OrderedProcess a = new OrderedProcess(g, "A");
-            OrderedProcess b = new OrderedProcess(g, "B");
-            OrderedProcess c = new OrderedProcess(g, "C");
+            OrderedProcess<string> a = new OrderedProcess<string>(g, "A");
+            OrderedProcess<string> b = new OrderedProcess<string>(g, "B");
+            OrderedProcess<string> c = new OrderedProcess<string>(g, "C");
 
             a.Before(b).Before(c);
 
-            IEnumerable<IEnumerable<OrderedProcess>> s = g.CalculateSort();
+            IEnumerable<IEnumerable<OrderedProcess<string>>> s = g.CalculateSort();
 
             Assert.AreEqual(1, s.Skip(0).First().Count());
             Assert.AreEqual(a, s.Skip(0).First().First());
@@ -70,10 +70,10 @@ namespace Topological_Sorting_Test
         [ExpectedException(typeof(InvalidOperationException))]
         public void Unorderable()
         {
-            DependencyGraph g = new DependencyGraph();
+            DependencyGraph<string> g = new DependencyGraph<string>();
 
-            OrderedProcess a = new OrderedProcess(g, "A");
-            OrderedProcess b = new OrderedProcess(g, "B");
+            OrderedProcess<string> a = new OrderedProcess<string>(g, "A");
+            OrderedProcess<string> b = new OrderedProcess<string>(g, "B");
 
             a.Before(b);
             b.Before(a);
@@ -87,16 +87,16 @@ namespace Topological_Sorting_Test
         [TestMethod]
         public void BasicBranching()
         {
-            DependencyGraph g = new DependencyGraph();
+            DependencyGraph<string> g = new DependencyGraph<string>();
 
-            OrderedProcess a = new OrderedProcess(g, "A");
-            OrderedProcess b1 = new OrderedProcess(g, "B1");
-            OrderedProcess b2 = new OrderedProcess(g, "B2");
-            OrderedProcess c = new OrderedProcess(g, "C");
+            OrderedProcess<string> a = new OrderedProcess<string>(g, "A");
+            OrderedProcess<string> b1 = new OrderedProcess<string>(g, "B1");
+            OrderedProcess<string> b2 = new OrderedProcess<string>(g, "B2");
+            OrderedProcess<string> c = new OrderedProcess<string>(g, "C");
 
             a.Before(b1, b2).Before(c);
 
-            IEnumerable<IEnumerable<OrderedProcess>> s = g.CalculateSort();
+            IEnumerable<IEnumerable<OrderedProcess<string>>> s = g.CalculateSort();
 
             Assert.AreEqual(1, s.Skip(0).First().Count());
             Assert.AreEqual(a, s.Skip(0).First().First());
@@ -115,20 +115,20 @@ namespace Topological_Sorting_Test
         [TestMethod]
         public void ComplexBranching()
         {
-            DependencyGraph g = new DependencyGraph();
+            DependencyGraph<string> g = new DependencyGraph<string>();
 
-            OrderedProcess a = new OrderedProcess(g, "A");
-            OrderedProcess b1 = new OrderedProcess(g, "B1");
-            OrderedProcess b2 = new OrderedProcess(g, "B2");
-            OrderedProcess c1 = new OrderedProcess(g, "C1");
-            OrderedProcess c2 = new OrderedProcess(g, "C2");
-            OrderedProcess c3 = new OrderedProcess(g, "C3");
-            OrderedProcess c4 = new OrderedProcess(g, "C4");
-            OrderedProcess d = new OrderedProcess(g, "D");
+            OrderedProcess<string> a = new OrderedProcess<string>(g, "A");
+            OrderedProcess<string> b1 = new OrderedProcess<string>(g, "B1");
+            OrderedProcess<string> b2 = new OrderedProcess<string>(g, "B2");
+            OrderedProcess<string> c1 = new OrderedProcess<string>(g, "C1");
+            OrderedProcess<string> c2 = new OrderedProcess<string>(g, "C2");
+            OrderedProcess<string> c3 = new OrderedProcess<string>(g, "C3");
+            OrderedProcess<string> c4 = new OrderedProcess<string>(g, "C4");
+            OrderedProcess<string> d = new OrderedProcess<string>(g, "D");
 
             a.Before(b1, b2).Before(c1, c2, c3, c4).Before(d);
 
-            IEnumerable<IEnumerable<OrderedProcess>> s = g.CalculateSort();
+            IEnumerable<IEnumerable<OrderedProcess<string>>> s = g.CalculateSort();
 
             Assert.AreEqual(1, s.Skip(0).First().Count());
             Assert.AreEqual(a, s.Skip(0).First().First());
@@ -154,16 +154,16 @@ namespace Topological_Sorting_Test
         [ExpectedException(typeof(InvalidOperationException))]
         public void BranchingUnorderable()
         {
-            DependencyGraph g = new DependencyGraph();
+            DependencyGraph<string> g = new DependencyGraph<string>();
 
-            OrderedProcess a = new OrderedProcess(g, "A");
-            OrderedProcess b1 = new OrderedProcess(g, "B1");
-            OrderedProcess b2 = new OrderedProcess(g, "B2");
-            OrderedProcess c1 = new OrderedProcess(g, "C1");
-            OrderedProcess c2 = new OrderedProcess(g, "C2");
-            OrderedProcess c3 = new OrderedProcess(g, "C3");
-            OrderedProcess c4 = new OrderedProcess(g, "C4");
-            OrderedProcess d = new OrderedProcess(g, "D");
+            OrderedProcess<string> a = new OrderedProcess<string>(g, "A");
+            OrderedProcess<string> b1 = new OrderedProcess<string>(g, "B1");
+            OrderedProcess<string> b2 = new OrderedProcess<string>(g, "B2");
+            OrderedProcess<string> c1 = new OrderedProcess<string>(g, "C1");
+            OrderedProcess<string> c2 = new OrderedProcess<string>(g, "C2");
+            OrderedProcess<string> c3 = new OrderedProcess<string>(g, "C3");
+            OrderedProcess<string> c4 = new OrderedProcess<string>(g, "C4");
+            OrderedProcess<string> d = new OrderedProcess<string>(g, "D");
 
             a.Before(b1, b2).Before(c1, c2, c3, c4).Before(d).Before(b1);
 

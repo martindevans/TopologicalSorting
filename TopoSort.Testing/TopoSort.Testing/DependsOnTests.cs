@@ -44,7 +44,7 @@ namespace TopoSort.Testing {
                 new ClassFoo(),
             };
 
-            var sorted = instances.Sort();
+            var sorted = instances.TopoSort();
 
             Assert.Equal(sorted, new List<BaseClass> {
                 new ClassBar(),

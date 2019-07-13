@@ -159,7 +159,7 @@ namespace TopoSort {
             return results;
         }
 
-        public static IEnumerable<TType> Sort<TType>(this IEnumerable<TType> items) {
+        public static IEnumerable<TType> TopoSort<TType>(this IEnumerable<TType> items) {
             var graph = new DependencyGraph<TType>();
             var typeMap = new Dictionary<Type, HashSet<Type>>();
             var processMap = new Dictionary<Type, HashSet<OrderedProcess<TType>>>();

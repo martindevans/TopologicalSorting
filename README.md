@@ -1,4 +1,4 @@
-This is a fork of Martin Devans' (https://github.com/martindevans/TopologicalSorting)[TopologicalSorting] library.
+This is a fork of Martin Devans' [TopologicalSorting](https://github.com/martindevans/TopologicalSorting) library.
 
 Topological Sorting
 ===================

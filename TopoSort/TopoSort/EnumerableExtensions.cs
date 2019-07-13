@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Linq;
 
 
 namespace TopoSort {
@@ -96,6 +99,86 @@ namespace TopoSort {
             }
 
             return followers;
+        }
+
+        private static IEnumerable<DependsOnAttribute> GetAttributes(Type type) {
+            return type
+                   .GetCustomAttributes(typeof(DependsOnAttribute))
+                   .Select(a => (DependsOnAttribute) a);
+        }
+
+        private static HashSet<Type> GetDependencies(Type type) {
+            var attrs = GetAttributes(type);
+            return new HashSet<Type>(attrs.SelectMany(a => a.Dependencies));
+        }
+
+        private static void UpdateTypeMap(IDictionary<Type, HashSet<Type>> typeMap,
+                                          Type type,
+                                          HashSet<Type> dependencies) {
+            if (typeMap.ContainsKey(type)) {
+                var set = typeMap[type];
+                set.IntersectWith(dependencies);
+            } else {
+                typeMap[type] = dependencies;
+            }
+        }
+
+        public static void UpdateProcessMap<TType>(Dictionary<Type, HashSet<OrderedProcess<TType>>> processMap,
+                                                   Type type,
+                                                   OrderedProcess<TType> process) {
+            if (processMap.ContainsKey(type)) {
+                var set = processMap[type];
+                set.Add(process);
+            } else {
+                processMap[type] = new HashSet<OrderedProcess<TType>> {process};
+            }
+        }
+
+        public static void InitializeMaps<TType>(DependencyGraph<TType> graph,
+                                                 IEnumerable<TType> items,
+                                                 Dictionary<Type, HashSet<Type>> typeMap,
+                                                 Dictionary<Type, HashSet<OrderedProcess<TType>>> processMap) {
+            foreach (var item in items) {
+                var process = new OrderedProcess<TType>(graph, item);
+
+                var type = item.GetType();
+                var deps = GetDependencies(type);
+
+                UpdateTypeMap(typeMap, type, deps);
+                UpdateProcessMap(processMap, type, process);
+            }
+        }
+
+        public static List<TType> GraphAsList<TType>(TopologicalSort<TType> solution) {
+            var results = new List<TType>();
+
+            foreach (OrderedProcess<TType> item in solution) {
+                results.Add(item.Value);
+            }
+
+            return results;
+        }
+
+        public static IEnumerable<TType> Sort<TType>(this IEnumerable<TType> items) {
+            var graph = new DependencyGraph<TType>();
+            var typeMap = new Dictionary<Type, HashSet<Type>>();
+            var processMap = new Dictionary<Type, HashSet<OrderedProcess<TType>>>();
+
+            InitializeMaps(graph, items, typeMap, processMap);
+
+            foreach (var typeEntry in typeMap) {
+                var type = typeEntry.Key;
+                var dependencyTypes = typeEntry.Value;
+                var dependencyObjects = dependencyTypes.SelectMany(dt => processMap[dt]);
+
+                foreach (var instance in processMap[typeEntry.Key]) {
+                    instance.After(dependencyObjects);
+                }
+
+            }
+
+            var result = graph.CalculateSort();
+            return GraphAsList(result);
         }
 
     }

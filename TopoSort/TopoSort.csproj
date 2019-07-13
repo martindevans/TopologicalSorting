@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Martin Devans, Tristan McPherson, Dustin Lacewell</Authors>
+    <Description>Topological sorting system for C#/.net</Description>
+    <PackageProjectUrl>https://github.com/dustinlacewell/TopologicalSorting</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/dustinlacewell/TopologicalSorting.git</RepositoryUrl>
+    <PackageTags>DependencyInjection TopologicalSort</PackageTags>
+    <PackageVersion>0.1.0</PackageVersion>
+    <Title>TopologicalSorting</Title>
+  </PropertyGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
+</Project>

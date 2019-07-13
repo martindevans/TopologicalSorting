@@ -4,6 +4,9 @@
 *.trx
 *.nupkg
 *.ncrunchproject
+**/obj/
+**/bin/
+packages/
 
 _ReSharper.Caches
 TestResults

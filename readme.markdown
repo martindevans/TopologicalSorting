@@ -1,7 +1,7 @@
 Topological Sorting
 ===================
 
-Topological sorting is the process or ordering a directed graph, such that all vertices with a link to another vertex are considered before the destination vertex. Topological sorting is often used for dependency resolution, when a series of tasks need to be executed, and a certain task cannot be executed until another one it depends upon has already executed.
+Topological sorting is the process of ordering a directed graph, such that all vertices with a link to another vertex are considered before the destination vertex. Topological sorting is often used for dependency resolution, when a series of tasks need to be executed, and a certain task cannot be executed until another one it depends upon has already executed.
 
 TopologicalSorting
 ------------------
